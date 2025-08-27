@@ -1,0 +1,58 @@
+module.exports = {
+  content: [
+    "./content/**/*.{md,njk,html}",
+    "./_includes/**/*.{njk,html}",
+    "./css/**/*.css"
+  ],
+  theme: {
+    extend: {
+      spacing: {
+        1: '0.25rem',
+        2: '0.5rem', 
+        3: '0.75rem',
+        4: '1rem',
+        5: '1.25rem',
+        6: '1.5rem',
+        8: '2rem',
+        10: '2.5rem'
+      },
+      fontSize: {
+        base: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem'
+      },
+      fontFamily: {
+        'twk': ['TWKLausanne', 'sans-serif'],
+        'queens': ['QueensCompressed', 'serif']
+      },
+      colors: {
+        stone: {
+          300: '#d6d3d1',
+          400: '#a8a29e',
+          '400-inverted': '#575d61'
+        }
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' }
+        }
+      }
+    }
+  },
+  plugins: [
+    require('@tailwindcss/typography')
+  ]
+}

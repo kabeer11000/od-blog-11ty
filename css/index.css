@@ -1,22 +1,61 @@
-/* Defaults */
-:root {
-	--font-family: -apple-system, system-ui, sans-serif;
-	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+/* Tailwind CSS imports */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Custom fonts */
+@font-face {
+  font-family: "QueensCompressed";
+  src: url("/fonts/QueensCompressed/QueensCompressed_W-Light.woff2");
+  font-display: swap;
 }
 
-/* Theme colors */
+@font-face {
+  font-family: "TWKLausanne";
+  src: url("/fonts/TWKLausanne/TWKLausanne-400.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* otherdev.com design tokens */
 :root {
-	--color-gray-20: #e0e0e0;
-	--color-gray-50: #C0C0C0;
-	--color-gray-90: #333;
+	/* Colors matching otherdev.com */
+	--color-stone-400-inverted: #575d61;
+	--background: #a8a29e; /* stone-400 */
+	
+	/* Spacing System */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+	--space-10: 40px;
 
-	--background-color: #fff;
+	/* Typography matching otherdev.com */
+	--text-base: 16px;
+	--text-lg: 18px;
+	--text-xl: 20px;
+	--text-2xl: 24px;
+	--text-3xl: 30px;
+	--text-4xl: 36px;
+	--text-5xl: 48px;
 
-	--text-color: var(--color-gray-90);
-	--text-color-link: #082840;
-	--text-color-link-active: #5f2b48;
-	--text-color-link-visited: #17050F;
+	/* Visual Effects */
+	--noise-opacity: 0.2;
+	--animation-duration: 0.5s;
+	
+	/* Font families */
+	--font-family: "TWKLausanne", -apple-system, system-ui, sans-serif;
+	--font-family-heading: "QueensCompressed", serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, "Courier New", monospace;
 
+	/* Legacy variables for compatibility */
+	--background-color: var(--background);
+	--text-color: var(--color-stone-400-inverted);
+	--text-color-link: var(--color-stone-400-inverted);
+	--text-color-link-active: var(--color-stone-400-inverted);
+	--text-color-link-visited: var(--color-stone-400-inverted);
 	--syntax-tab-size: 2;
 }
 
