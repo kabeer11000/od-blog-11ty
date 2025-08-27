@@ -1,16 +1,18 @@
 ---
 layout: layouts/base.njk
 ---
-<!-- Delete this block, which will also remove the component CSS from the bundle -->
-<style>{% include "css/message-box.css" %}</style>
-<div class="message-box">
-	<ol>
-		<li>Edit <code>_data/metadata.js</code> with your blog’s information.</li>
-		<li>(Optional) Edit <code>eleventy.config.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
-		<li>Delete this message from <code>_includes/layouts/home.njk</code>.</li>
-	</ol>
-	<p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
-</div>
-<!-- Stop deleting -->
 
-{{ content | safe }}
+<div class="max-w-4xl mx-auto px-4 py-8">
+	<header class="mb-16 text-center">
+		<h1 class="font-queens text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-[var(--color-stone-400-inverted)]">
+			Creative insights and technical exploration
+		</h1>
+		<p class="font-twk text-lg md:text-xl text-[var(--color-stone-400-inverted)]/80 max-w-2xl mx-auto leading-relaxed">
+			Thoughts on software development, design, and building meaningful digital experiences.
+		</p>
+	</header>
+
+	<main>
+		{{ content | safe }}
+	</main>
+</div>

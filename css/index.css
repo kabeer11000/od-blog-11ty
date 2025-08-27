@@ -87,16 +87,38 @@
 html,
 body {
 	padding: 0;
-	margin: 0 auto;
+	margin: 0;
 	font-family: var(--font-family);
 	color: var(--text-color);
 	background-color: var(--background-color);
+	line-height: 1.6;
 }
+
 html {
 	overflow-y: scroll;
 }
+
 body {
-	max-width: 60em;
+	min-height: 100vh;
+}
+
+/* Responsive container matching otherdev.com */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+	.container {
+		padding: 0 2rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.container {
+		padding: 0 3rem;
+	}
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -153,12 +175,74 @@ a[href]:active {
 	color: var(--text-color-link-active);
 }
 
-main,
-footer {
-	padding: 1rem;
+main {
+	flex: 1;
 }
+
 main :first-child {
 	margin-top: 0;
+}
+
+/* Responsive typography matching otherdev.com */
+.prose {
+	font-size: 1rem;
+	line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+	.prose {
+		font-size: 1.125rem;
+		line-height: 1.6;
+	}
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+	font-family: var(--font-family-heading);
+	font-weight: normal;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	line-height: 1.2;
+}
+
+.prose h1 {
+	font-size: 2rem;
+}
+
+.prose h2 {
+	font-size: 1.75rem;
+}
+
+.prose h3 {
+	font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.prose h1 {
+		font-size: 2.5rem;
+	}
+	
+	.prose h2 {
+		font-size: 2rem;
+	}
+	
+	.prose h3 {
+		font-size: 1.75rem;
+	}
+}
+
+.prose p {
+	margin-bottom: 1.5em;
+}
+
+.prose a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+}
+
+.prose a:hover {
+	opacity: 0.75;
 }
 
 header {

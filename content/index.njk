@@ -8,16 +8,24 @@ const numberOfLatestPostsToShow = 3;
 ---
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
+<section class="mb-12">
+	<h2 class="font-queens text-2xl md:text-3xl leading-tight mb-8 text-[var(--color-stone-400-inverted)]">
+		Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}
+	</h2>
 
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
 {% set postslistCounter = postsCount %}
 {% include "postslist.njk" %}
 
-{% set morePosts = postsCount - numberOfLatestPostsToShow %}
-{% if morePosts > 0 %}
-<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="blog.njk">the archive</a>.</p>
-{% endif %}
+	{% set morePosts = postsCount - numberOfLatestPostsToShow %}
+	{% if morePosts > 0 %}
+	<div class="mt-12 text-center">
+		<p class="font-twk text-[var(--color-stone-400-inverted)]/80">
+			{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/" class="font-queens text-lg hover:opacity-75 transition-opacity text-[var(--color-stone-400-inverted)] underline">the archive</a>.
+		</p>
+	</div>
+	{% endif %}
+</section>
 
 {# List every content page in the project #}
 {#

@@ -96,19 +96,11 @@
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
 
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
-
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
-		</header>
+		{#- Include otherdev.com style navigation -#}
+		{% include "navigation.njk" %}
+		
+		{#- Add body padding to account for fixed header -#}
+		<div class="pt-16 lg:pt-20"></div>
 
 		<main id="main">
 			<heading-anchors>
@@ -116,10 +108,25 @@
 			</heading-anchors>
 		</main>
 
-		<footer>
-			<p>
-				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
-			</p>
+		<footer class="mt-16 px-4 py-8 border-t border-[var(--color-stone-400-inverted)]/20">
+			<div class="max-w-4xl mx-auto">
+				<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+					<div class="font-queens text-lg">
+						<span>{{ metadata.title }}</span>
+					</div>
+					<div class="flex flex-col md:flex-row gap-4 md:gap-8 text-sm">
+						<p class="font-twk">
+							<a href="mailto:{{ metadata.contactEmail }}" class="hover:opacity-75 transition-opacity">{{ metadata.contactEmail }}</a>
+						</p>
+						<p class="font-twk">
+							<a href="tel:{{ metadata.contactPhone }}" class="hover:opacity-75 transition-opacity">{{ metadata.contactPhone }}</a>
+						</p>
+						<p class="font-twk text-xs opacity-75">
+							Built with <a href="https://www.11ty.dev/" class="hover:opacity-75 transition-opacity">{{ eleventy.generator }}</a>
+						</p>
+					</div>
+				</div>
+			</div>
 		</footer>
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
