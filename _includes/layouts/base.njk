@@ -3,9 +3,34 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title or metadata.title }}</title>
+		<title>{{ title or metadata.title }}{% if title %} — Creative software agency{% endif %}</title>
 		<meta name="description" content="{{ description or metadata.description }}">
+		<meta name="keywords" content="{{ metadata.keywords }}">
+		
+		{#- Open Graph meta tags #}
+		<meta property="og:title" content="{{ title or metadata.title }}{% if title %} — Creative software agency{% endif %}">
+		<meta property="og:description" content="{{ description or metadata.description }}">
+		<meta property="og:url" content="{{ metadata.url }}{{ page.url }}">
+		<meta property="og:image" content="{{ metadata.url }}/images/icons/other-dev-intro.png">
+		<meta property="og:type" content="{% if page.url == '/' %}website{% else %}article{% endif %}">
+		<meta property="og:site_name" content="{{ metadata.title }}">
+		
+		{#- Twitter Card meta tags #}
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="{{ metadata.twitter }}">
+		<meta name="twitter:title" content="{{ title or metadata.title }}{% if title %} — Creative software agency{% endif %}">
+		<meta name="twitter:description" content="{{ description or metadata.description }}">
+		<meta name="twitter:image" content="{{ metadata.url }}/images/icons/other-dev-intro.png">
+		
+		{#- RSS Feed #}
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+		
+		{#- Favicon and touch icons #}
+		<link rel="icon" href="{{ metadata.logo }}" type="image/png">
+		<link rel="apple-touch-icon" href="{{ metadata.logo }}">
+		
+		{#- Canonical URL #}
+		<link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
 
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
 		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
@@ -38,6 +63,35 @@
 
 		{#- Add the heading-anchors web component to the JavaScript bundle #}
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
+		
+		{#- Structured Data (JSON-LD) #}
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "{{ metadata.businessType }}",
+			"name": "{{ metadata.title }}",
+			"url": "{{ metadata.url }}",
+			"logo": "{{ metadata.url }}{{ metadata.logo }}",
+			"description": "{{ metadata.description }}",
+			"contactPoint": {
+				"@type": "ContactPoint",
+				"telephone": "{{ metadata.contactPhone }}",
+				"email": "{{ metadata.contactEmail }}",
+				"contactType": "customer service",
+				"areaServed": {{ metadata.serviceAreas | dump | safe }},
+				"availableLanguage": {{ metadata.languages | dump | safe }}
+			},
+			"sameAs": [
+				"{{ metadata.gmbLink }}",
+				"https://twitter.com/{{ metadata.twitter | replace('@', '') }}"
+			],
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": "{{ metadata.url }}/search?q={search_term_string}",
+				"query-input": "required name=search_term_string"
+			}
+		}
+		</script>
 	</head>
 	<body>
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>

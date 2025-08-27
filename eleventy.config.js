@@ -76,11 +76,12 @@ export default async function(eleventyConfig) {
 		},
 		metadata: {
 			language: "en",
-			title: "Other Dev Research",
-			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			title: "The Other Dev — Creative software agency",
+			subtitle: "Creative software agency focused on accessible, engaging digital experiences. Web development, graphic design, software development, and technology solutions.",
+			base: "https://otherdev.com",
 			author: {
-				name: "Your Name"
+				name: "The Other Dev",
+				email: "hello@otherdev.com"
 			}
 		}
 	});
