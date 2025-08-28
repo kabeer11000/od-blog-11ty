@@ -12,18 +12,21 @@
 {%- set letsMeetLink = {
   title: "Let's meet",
   path: "https://calendly.com/otherdev/30-minute-consultation-call-1",
-  target: "_blank"
+  target: "_blank",
+  svg: '<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true"><path d="M27.9487 0L28 23.6922H23.8898V6.97433L2.87707 28L0 25.1281L21.0128 4.10256H4.31559V0H27.9487Z" fill="currentColor"></path></svg>'
 } -%}
 
 {#- Social links -#}
 {%- set socialLinks = [
   {
     title: "LinkedIn", 
-    path: "https://www.linkedin.com/company/theotherdev/"
+    path: "https://www.linkedin.com/company/theotherdev/",
+    svg: '<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true"><path d="M88.0952 0H11.9048C5.33333 0 0 5.33333 0 11.9048V88.0952C0 94.6667 5.33333 100 11.9048 100H88.0952C94.6667 100 100 94.6667 100 88.0952V11.9048C100 5.33333 94.6667 0 88.0952 0ZM30.9524 38.0952V83.3333H16.6667V38.0952H30.9524ZM16.6667 24.9286C16.6667 21.5952 19.5238 19.0476 23.8095 19.0476C28.0952 19.0476 30.7857 21.5952 30.9524 24.9286C30.9524 28.2619 28.2857 30.9524 23.8095 30.9524C19.5238 30.9524 16.6667 28.2619 16.6667 24.9286ZM83.3333 83.3333H69.0476C69.0476 83.3333 69.0476 61.2857 69.0476 59.5238C69.0476 54.7619 66.6667 50 60.7143 49.9048H60.5238C54.7619 49.9048 52.381 54.8095 52.381 59.5238C52.381 61.6905 52.381 83.3333 52.381 83.3333H38.0952V38.0952H52.381V44.1905C52.381 44.1905 56.9762 38.0952 66.2143 38.0952C75.6667 38.0952 83.3333 44.5952 83.3333 57.7619V83.3333Z" fill="currentColor"></path></svg>'
   },
   {
     title: "Instagram",
-    path: "https://instagram.com/other.dev"
+    path: "https://instagram.com/other.dev",
+    svg: '<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true"><path d="M49.5508 0C3.59828 0 0 3.59828 0 49.5508V50.4492C0 96.4017 3.59828 100 49.5508 100H50.4492C96.4017 100 100 96.4017 100 50.4492V50C100 3.63 96.37 0 50 0H49.5508ZM40 10H60C87.8225 10 90 12.1775 90 40V60C90 87.8225 87.8225 90 60 90H40C12.1775 90 10 87.8225 10 60V40C10 12.1775 12.1775 10 40 10ZM74.9854 20C72.2229 20.0075 69.9925 22.2521 70 25.0146C70.0075 27.7771 72.2521 30.0075 75.0146 30C77.7771 29.9925 80.0075 27.7479 80 24.9854C79.9925 22.2229 77.7479 19.9925 74.9854 20ZM49.9414 25C36.1364 25.0325 24.9675 36.2536 25 50.0586C25.0325 63.8636 36.2536 75.0325 50.0586 75C63.8636 74.9675 75.0325 63.7464 75 49.9414C74.9675 36.1364 63.7464 24.9675 49.9414 25ZM49.9658 35C58.2483 34.98 64.98 41.6833 65 49.9658C65.0175 58.2483 58.3167 64.98 50.0342 65C41.7517 65.02 35.02 58.3192 35 50.0342C34.98 41.7517 41.6833 35.02 49.9658 35Z" fill="currentColor"></path></svg>'
   }
 ] -%}
 
@@ -32,7 +35,12 @@
   <div>
     <a href="/" class="w-full flex-1/2 font-queens text-lg" aria-label="The Other Dev Home">{{ metadata.title }}</a>
   </div>
-  <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-menu" class="mobile-navigation-trigger flex-1/2 p-2 -mr-2 w-full text-right">
+  <div class="flex items-center gap-4">
+    <div class="font-twk text-xs text-right">
+      <span id="mobile-clock" class="block min-w-[12ch] tabular-nums">--:-- PKT</span>
+      <p class="opacity-75">Karachi</p>
+    </div>
+    <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-menu" class="mobile-navigation-trigger p-2 -mr-2">
     <span class="sr-only">Menu</span>
     <div class="relative h-6 overflow-hidden">
       <span class="menu-text block">Menu</span>
@@ -42,13 +50,13 @@
 </nav>
 
 {#- Mobile Menu Panel -#}
-<div id="mobile-menu" class="menu-withclock hidden fixed inset-0 z-40 text-black bg-stone-300 translate-y-full lg:hidden will-change-transform" aria-hidden="true">
+<div id="mobile-menu" class="menu-withclock fixed inset-0 z-40 text-black bg-stone-300 lg:hidden will-change-transform" style="transform: translateY(100%)" aria-hidden="true">
   <div class="pt-24 h-full overflow-y-auto">
     <ul class="pb-20" aria-label="Mobile Navigation Links">
       {#- Main Nav Links -#}
       {% for item in navLinks %}
         <li class="border-b border-black">
-          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="block py-4 px-4 text-lg hover:bg-stone-600/10 transition-colors duration-200" onclick="document.getElementById('mobile-menu').classList.remove('!translate-y-0')">
+          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="block py-4 px-4 text-lg hover:bg-stone-600/10 transition-colors duration-200">
             {{ item.title }}
           </a>
         </li>
@@ -72,8 +80,9 @@
     {#- Mobile Footer Social Links -#}
     <div class="fixed px-4 bottom-0 left-0 w-full bg-stone-400/90 backdrop-blur-sm flex justify-between items-center py-4 border-t border-black">
       {% for link in socialLinks %}
-        <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity" aria-label="{{ link.title }} (opens in a new tab)">
-          <span>{{ link.title }}</span>
+        <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center hover:opacity-80 transition-opacity" aria-label="{{ link.title }} (opens in a new tab)">
+          {{ link.svg | safe }}
+          <span class="ml-2 text-sm">{{ link.title }}</span>
         </a>
       {% endfor %}
     </div>
@@ -84,18 +93,22 @@
 <nav aria-label="Primary Navigation" class="menu-withclock hidden lg:block w-full text-red pt-4 px-4 text-lg header-blend-mode bg-clip-text bg-transparent text-[var(--color-stone-400-inverted)] fixed top-0 z-50">
   <div class="flex justify-between items-center lg:container mx-auto">
     <div class="font-bold font-queens text-xl">
-      <a href="/" class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left" aria-label="The Other Dev Home">{{ metadata.title }}</a>
+      <a href="/" class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left cursor-arrow-right" aria-label="Other Dev® Home">{{ metadata.title }}</a>
     </div>
 
-    <div>
+    <div class="flex items-center gap-8">
       <p class="font-twk">Software and Design</p>
+      <div class="font-twk text-sm">
+        <span id="desktop-clock" class="min-w-[17ch] tabular-nums">--:-- PKT</span>
+        <p class="text-xs opacity-75 mt-1">Karachi</p>
+      </div>
     </div>
 
     {#- Main Desktop Links -#}
     <ul class="flex gap-6 font-twk">
       {% for item in navLinks %}
         <li>
-          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left hover:opacity-75 transition-all"{% if item.path == page.url %} aria-current="page"{% endif %}>
+          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left hover:opacity-75 transition-all cursor-arrow-right"{% if item.path == page.url %} aria-current="page"{% endif %}>
             {{ item.title }}
           </a>
         </li>
@@ -105,14 +118,15 @@
     {#- Desktop Right-Side Links (Action & Social) -#}
     <ul class="flex gap-4 items-center font-twk">
       <li>
-        <a href="{{ letsMeetLink.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity" aria-label="{{ letsMeetLink.title }} (opens in a new tab)">
+        <a href="{{ letsMeetLink.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity cursor-arrow-right" aria-label="{{ letsMeetLink.title }} (opens in a new tab)">
           <span class="font-medium">{{ letsMeetLink.title }}</span>
+          {{ letsMeetLink.svg | safe }}
         </a>
       </li>
       {% for link in socialLinks %}
         <li>
-          <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity" aria-label="{{ link.title }} (opens in a new tab)">
-            <span class="font-medium">{{ link.title }}</span>
+          <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center hover:opacity-80 transition-opacity cursor-arrow-right" aria-label="{{ link.title }} (opens in a new tab)">
+            {{ link.svg | safe }}
           </a>
         </li>
       {% endfor %}
@@ -141,10 +155,7 @@
   /* Mobile menu transitions */
   #mobile-menu {
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  
-  #mobile-menu.active {
-    transform: translateY(0);
+    transform: translateY(100%);
   }
   
   /* Mobile navigation text animation */
@@ -163,22 +174,45 @@
 </style>
 
 {#- Navigation Scripts -#}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const menuButton = document.getElementById('mobile-nav-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
+  const menuText = menuButton.querySelector('.menu-text');
+  const closeText = menuButton.querySelector('.close-text');
+  const body = document.body;
   
   if (menuButton && mobileMenu) {
-    mobileMenu.classList.remove('hidden');
+    // Set initial position with GSAP
+    gsap.set(mobileMenu, { y: '100%' });
     
     menuButton.addEventListener('click', function() {
       const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
       
-      // Toggle menu visibility
+      // Toggle menu visibility with GSAP animations
       if (isOpen) {
-        mobileMenu.style.transform = 'translateY(100%)';
+        // Close menu
+        gsap.to(mobileMenu, { 
+          duration: 0.5, 
+          y: '100%', 
+          ease: "power2.inOut" 
+        });
+        // Animate text swap
+        gsap.to(closeText, { duration: 0.3, y: 24, ease: "power2.inOut" });
+        gsap.to(menuText, { duration: 0.3, y: 0, ease: "power2.inOut" });
+        body.style.overflow = '';
       } else {
-        mobileMenu.style.transform = 'translateY(0%)';
+        // Open menu
+        gsap.to(mobileMenu, { 
+          duration: 0.5, 
+          y: '0%', 
+          ease: "power2.inOut" 
+        });
+        // Animate text swap
+        gsap.to(menuText, { duration: 0.3, y: -24, ease: "power2.inOut" });
+        gsap.to(closeText, { duration: 0.3, y: 0, ease: "power2.inOut" });
+        body.style.overflow = 'hidden';
       }
       
       // Update accessibility attributes
@@ -190,27 +224,55 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuLinks = mobileMenu.querySelectorAll('a');
     menuLinks.forEach(link => {
       link.addEventListener('click', function() {
-        mobileMenu.style.transform = 'translateY(100%)';
+        gsap.to(mobileMenu, { 
+          duration: 0.5, 
+          y: '100%', 
+          ease: "power2.inOut" 
+        });
+        gsap.to(closeText, { duration: 0.3, y: 24, ease: "power2.inOut" });
+        gsap.to(menuText, { duration: 0.3, y: 0, ease: "power2.inOut" });
         menuButton.setAttribute('aria-expanded', 'false');
         mobileMenu.setAttribute('aria-hidden', 'true');
+        body.style.overflow = '';
       });
     });
-    
-    // Set initial position
-    mobileMenu.style.transform = 'translateY(100%)';
   }
-  
-  // Handle mobile menu body scroll lock
-  const body = document.body;
-  if (menuButton && mobileMenu) {
-    menuButton.addEventListener('click', function() {
-      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-      if (!isOpen) {
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = '';
-      }
-    });
+
+  // Clock functionality
+  function updateClocks() {
+    const options = {
+      timeZone: 'Asia/Karachi',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    };
+
+    try {
+      const now = new Date();
+      let timeString = now.toLocaleTimeString('en-US', options);
+      timeString = timeString.replace(/\s*\(PKT\)/, '');
+      
+      // Update both desktop and mobile clocks
+      const desktopClock = document.getElementById('desktop-clock');
+      const mobileClock = document.getElementById('mobile-clock');
+      
+      if (desktopClock) desktopClock.textContent = timeString;
+      if (mobileClock) mobileClock.textContent = timeString;
+    } catch (e) {
+      // Fallback display
+      const fallbackTime = '--:-- PKT';
+      const desktopClock = document.getElementById('desktop-clock');
+      const mobileClock = document.getElementById('mobile-clock');
+      
+      if (desktopClock) desktopClock.textContent = fallbackTime;
+      if (mobileClock) mobileClock.textContent = fallbackTime;
+    }
   }
+
+  // Initialize clock
+  updateClocks();
+  const clockInterval = setInterval(updateClocks, 1000);
 });
 </script>

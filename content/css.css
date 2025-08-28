@@ -17,7 +17,22 @@ layout: false
 
 @font-face {
   font-family: "TWKLausanne";
+  src: url("/fonts/TWKLausanne/TWKLausanne-200 (1).woff2") format("woff2");
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TWKLausanne";
+  src: url("/fonts/TWKLausanne/TWKLausanne-300-1.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TWKLausanne";
   src: url("/fonts/TWKLausanne/TWKLausanne-400.woff2") format("woff2");
+  font-weight: 400;
   font-display: swap;
 }
 

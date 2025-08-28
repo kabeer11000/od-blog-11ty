@@ -93,11 +93,11 @@ export default async function(eleventyConfig) {
 		},
 		metadata: {
 			language: "en",
-			title: "The Other Dev — Creative software agency",
+			title: "Other Dev® — Creative software agency",
 			subtitle: "Creative software agency focused on accessible, engaging digital experiences. Web development, graphic design, software development, and technology solutions.",
 			base: "https://otherdev.com",
 			author: {
-				name: "The Other Dev",
+				name: "Other Dev®",
 				email: "hello@otherdev.com"
 			}
 		}
