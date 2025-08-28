@@ -52,6 +52,7 @@
 		"zod-validation-error": "^3.5.2"
 	},
 	"dependencies": {
+		"@tabler/icons": "^3.34.1",
 		"@zachleat/heading-anchors": "^1.0.3",
 		"gsap": "^3.13.0"
 	}

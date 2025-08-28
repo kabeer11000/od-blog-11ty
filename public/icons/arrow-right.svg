@@ -1,4 +1,18 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16Z" fill="black"/>
-<path d="M8 15V17H20L14.5 22.5L15.92 23.92L23.84 16L15.92 8.08L14.5 9.5L20 15H8Z" fill="white"/>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="32"
+  height="32"
+  viewBox="0 0 24 24"
+  fill="black"
+  stroke="white"
+  stroke-width="1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18" />
+  <path d="M16 12l-4 -4" />
+  <path d="M16 12h-8" />
+  <path d="M12 16l4 -4" />
 </svg>
