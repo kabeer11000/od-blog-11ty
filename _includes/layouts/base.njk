@@ -49,8 +49,8 @@
 		{#- Add CSS to the bundle #}
 		<style>/* This is an arbitrary CSS string added to the bundle */</style>
 
-		{#- Add the contents of a file to the bundle #}
-		<style>{% include "css/index.css" %}</style>
+		{#- Link to processed CSS file #}
+		<link rel="stylesheet" href="/css/index.css">
 
 		{#- Or you can add from node_modules #}
 		{# <style>{% include "node_modules/something.css" %}</style> #}
@@ -94,32 +94,52 @@
 		</script>
 	</head>
 	<body>
-		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+		<div>
+			<a class="hidden" href="#main">Skip to content</a>
+		</div>
+		
+		{% include "navigation.njk" %}
+		
+		<div id="smooth-content" style="will-change: transform">
+			<div
+				class="noise-bg fixed w-full"
+				style="flex-grow: 1 1 auto;will-change: transform; height: 100%;"
+				aria-hidden="true">
+				<svg>
+					<filter id="noise-bg-fx">
+						<feTurbulence baseFrequency="0.5"></feTurbulence>
+					</filter>
+				</svg>
+			</div>
 
-		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
+			<main id="main" class="page snap-always relative snap-mandatory snap-y smooth-content no-scrollbar">
+				<div class="snap-center">
+					<heading-anchors>
+						{{ content | safe }}
+					</heading-anchors>
+				</div>
+			</main>
+		</div>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
-		</header>
-
-		<main id="main">
-			<heading-anchors>
-				{{ content | safe }}
-			</heading-anchors>
-		</main>
-
-		<footer>
-			<p>
-				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
-			</p>
+		<footer class="mt-16 px-4 py-8 border-t border-[var(--color-stone-400-inverted)]/20">
+			<div class="max-w-4xl mx-auto">
+				<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+					<div class="font-queens text-lg">
+						<span>{{ metadata.title }}</span>
+					</div>
+					<div class="flex flex-col md:flex-row gap-4 md:gap-8 text-sm">
+						<p class="font-twk">
+							<a href="mailto:{{ metadata.contactEmail }}" class="hover:opacity-75 transition-opacity">{{ metadata.contactEmail }}</a>
+						</p>
+						<p class="font-twk">
+							<a href="tel:{{ metadata.contactPhone }}" class="hover:opacity-75 transition-opacity">{{ metadata.contactPhone }}</a>
+						</p>
+						<p class="font-twk text-xs opacity-75">
+							Built with <a href="https://www.11ty.dev/" class="hover:opacity-75 transition-opacity">{{ eleventy.generator }}</a>
+						</p>
+					</div>
+				</div>
+			</div>
 		</footer>
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->

@@ -4,25 +4,62 @@ layout: layouts/base.njk
 {# Only include the syntax highlighter CSS on blog posts, included with the CSS per-page bundle #}
 <style>{% include "node_modules/prismjs/themes/prism-okaidia.css" %}</style>
 <style>{% include "css/prism-diff.css" %}</style>
-<h1>{{ title }}</h1>
 
-<ul class="post-metadata">
-	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
-	{%- for tag in tags | filterTagList %}
-	{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
-	{%- endfor %}
-</ul>
+<div class="min-h-screen bg-stone-400 relative overflow-hidden flex flex-col">
+	<div class="flex-auto w-full relative lg:container mx-auto">
+		<article class="py-24 md:py-32 px-4">
+			<header class="mb-12">
+				<h1 class="font-queens text-3xl md:text-4xl lg:text-5xl leading-tight mb-6 text-[var(--color-stone-400-inverted)]">{{ title }}</h1>
+				
+				<div class="flex flex-wrap gap-4 items-center text-sm text-[var(--color-stone-400-inverted)]/70 font-twk">
+					<time datetime="{{ page.date | htmlDateString }}" class="font-medium">
+						{{ page.date | readableDate }}
+					</time>
+					{%- if tags | filterTagList | length > 0 %}
+						<span class="hidden md:inline">•</span>
+						<div class="flex flex-wrap gap-2">
+							{%- for tag in tags | filterTagList %}
+							{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+							<a href="{{ tagUrl }}" class="inline-block px-3 py-1 bg-[var(--color-stone-400-inverted)]/10 hover:bg-[var(--color-stone-400-inverted)]/20 rounded-full text-xs font-medium transition-colors duration-200">
+								{{ tag }}
+							</a>
+							{%- endfor %}
+						</div>
+					{%- endif %}
+				</div>
+			</header>
 
-{{ content | safe }}
+			<div class="prose prose-lg max-w-none font-twk text-[var(--color-stone-400-inverted)]">
+				{{ content | safe }}
+			</div>
+		</article>
 
-{%- if collections.posts %}
-{%- set previousPost = collections.posts | getPreviousCollectionItem %}
-{%- set nextPost = collections.posts | getNextCollectionItem %}
-{%- if nextPost or previousPost %}
-<ul class="links-nextprev">
-	{%- if previousPost %}<li class="links-nextprev-prev">← Previous<br> <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{% endif %}
-	{%- if nextPost %}<li class="links-nextprev-next">Next →<br><a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
-</ul>
+		{%- if collections.posts %}
+		{%- set previousPost = collections.posts | getPreviousCollectionItem %}
+		{%- set nextPost = collections.posts | getNextCollectionItem %}
+		{%- if nextPost or previousPost %}
+		<nav class="px-4 pb-16 border-t border-[var(--color-stone-400-inverted)]/20" aria-label="Post navigation">
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+		{%- if previousPost %}
+		<div class="group">
+			<p class="text-xs font-twk text-[var(--color-stone-400-inverted)]/70 mb-2 uppercase tracking-wider">Previous</p>
+			<a href="{{ previousPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity text-[var(--color-stone-400-inverted)]">
+				{{ previousPost.data.title }}
+			</a>
+		</div>
+		{% endif %}
+		
+		{%- if nextPost %}
+		<div class="group md:text-right">
+			<p class="text-xs font-twk text-[var(--color-stone-400-inverted)]/70 mb-2 uppercase tracking-wider">Next</p>
+			<a href="{{ nextPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity text-[var(--color-stone-400-inverted)]">
+				{{ nextPost.data.title }}
+			</a>
+		</div>
+		{% endif %}
+	</div>
+</nav>
 {%- endif %}
 {%- endif %}
+	</div>
+</div>

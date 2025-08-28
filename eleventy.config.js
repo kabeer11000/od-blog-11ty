@@ -27,6 +27,23 @@ export default async function(eleventyConfig) {
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
 
+	// Process CSS files through PostCSS
+	eleventyConfig.addTemplateFormats("css");
+	eleventyConfig.addExtension("css", {
+		outputFileExtension: "css",
+		compile: async function(inputContent, inputPath) {
+			return async () => {
+				const postcss = (await import("postcss")).default;
+				const tailwindcss = (await import("tailwindcss")).default;
+				const autoprefixer = (await import("autoprefixer")).default;
+				
+				const result = await postcss([tailwindcss, autoprefixer])
+					.process(inputContent, { from: inputPath });
+				return result.css;
+			};
+		}
+	});
+
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 

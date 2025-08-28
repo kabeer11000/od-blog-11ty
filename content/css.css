@@ -1,3 +1,8 @@
+---
+permalink: /css/index.css
+eleventyExcludeFromCollections: true
+layout: false
+---
 /* Tailwind CSS v3 imports */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
@@ -20,7 +25,8 @@
 :root {
 	/* Colors matching otherdev.com */
 	--color-stone-400-inverted: #575d61;
-	--background: #a8a29e; /* stone-400 */
+	--color-stone-400: #a8a29e;
+	--background: var(--color-stone-400);
 	
 	/* Spacing System */
 	--space-1: 4px;
@@ -43,6 +49,7 @@
 
 	/* Visual Effects */
 	--noise-opacity: 0.2;
+	--cursor-arrow-size: 30px;
 	--animation-duration: 0.5s;
 	
 	/* Font families */
@@ -417,5 +424,95 @@ header {
 }
 .post-metadata time {
 	margin-right: 1em;
+}
+
+/* Dynamic underlines matching main site */
+.dynamic-underline-left,
+.dynamic-underline-right {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Animate the line from the left on hover */
+.dynamic-underline-left:hover::before {
+  transform: scaleX(1);
+}
+.dynamic-underline-left::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: top left;
+  transition: transform var(--animation-duration) ease;
+}
+
+/* Animate the line from the right on hover */
+.dynamic-underline-right:hover::before {
+  transform: scaleX(1);
+}
+.dynamic-underline-right::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  z-index: 999;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: top right;
+  transition: transform var(--animation-duration) ease;
+}
+
+/* Cursor arrows matching main site */
+.cursor-arrow-left {
+  cursor: url("/icons/arrow-left.svg") 30 30, auto;
+}
+.cursor-arrow-right {
+  cursor: url("/icons/arrow-right.svg") 30 30, auto;
+}
+
+/* Typography improvements matching main site */
+p {
+  font-size: var(--text-xl);
+}
+
+body {
+  background-color: var(--background);
+  font-family: "TWKLausanne", sans-serif;
+  font-display: swap;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Noise background matching main site */
+.noise-bg {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' result='noise' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Smooth scrolling container */
+#smooth-content {
+  will-change: transform;
+}
+
+/* Page snap scrolling */
+.page {
+  opacity: 1;
+}
+
+/* Scrollbar styles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
