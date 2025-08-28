@@ -4,14 +4,14 @@
 	"description": "A starter repository for a blog web site using the Eleventy site generator.",
 	"type": "module",
 	"scripts": {
-		"build": "npx @11ty/eleventy",
-		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
-		"build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
-		"start": "npx @11ty/eleventy --serve --quiet",
-		"start-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
-		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
-		"debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+		"build": "bunx @11ty/eleventy",
+		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 bunx @11ty/eleventy",
+		"build-production": "cross-env NODE_ENV=production bunx @11ty/eleventy",
+		"start": "bunx @11ty/eleventy --serve --quiet",
+		"debug": "cross-env DEBUG=Eleventy* bunx @11ty/eleventy",
+		"debugstart": "cross-env DEBUG=Eleventy* bunx @11ty/eleventy --serve --quiet",
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* bunx @11ty/eleventy",
+		"clean": "rm -rf _site"
 	},
 	"repository": {
 		"type": "git",
