@@ -1,15 +1,15 @@
 <div class="space-y-8">
 {%- for post in postslist | reverse %}
-	<article class="group border-b border-[var(--color-stone-400-inverted)]/10 pb-8 last:border-b-0">
+	<article class="group border-b border-black/10 pb-8 last:border-b-0">
 		<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 			<div class="flex-1">
-				<h2 class="font-queens text-xl md:text-2xl leading-tight mb-3 text-[var(--color-stone-400-inverted)]">
+				<h2 class="font-queens text-xl md:text-2xl leading-tight mb-3 blog-title">
 					<a href="{{ post.url }}" class="hover:opacity-75 transition-opacity{% if post.url == url %} opacity-75{% endif %}">
 						{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}
 					</a>
 				</h2>
 				{%- if post.data.description %}
-				<p class="font-twk text-[var(--color-stone-400-inverted)]/80 leading-relaxed mb-3">
+				<p class="font-twk blog-text opacity-80 leading-relaxed mb-3">
 					{{ post.data.description }}
 				</p>
 				{%- endif %}
@@ -17,14 +17,14 @@
 				<div class="flex flex-wrap gap-2">
 					{%- for tag in post.data.tags | filterTagList %}
 					{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-					<span class="inline-block px-2 py-1 bg-[var(--color-stone-400-inverted)]/10 text-xs font-twk font-medium rounded">
-						<a href="{{ tagUrl }}" class="hover:opacity-75 transition-opacity">{{ tag }}</a>
+					<span class="inline-block px-2 py-1 bg-black/10 text-xs font-twk font-medium rounded">
+						<a href="{{ tagUrl }}" class="hover:opacity-75 transition-opacity blog-text">{{ tag }}</a>
 					</span>
 					{%- endfor %}
 				</div>
 				{%- endif %}
 			</div>
-			<time class="font-twk text-sm text-[var(--color-stone-400-inverted)]/70 font-medium md:text-right whitespace-nowrap" datetime="{{ post.date | htmlDateString }}">
+			<time class="font-twk text-sm blog-text opacity-70 font-medium md:text-right whitespace-nowrap" datetime="{{ post.date | htmlDateString }}">
 				{{ post.date | readableDate("LLLL yyyy") }}
 			</time>
 		</div>

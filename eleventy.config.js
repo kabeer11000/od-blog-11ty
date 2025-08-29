@@ -27,18 +27,22 @@ export default async function(eleventyConfig) {
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
 
-	// Process CSS files through PostCSS
+	// Process CSS files through PostCSS with Tailwind v4
 	eleventyConfig.addTemplateFormats("css");
 	eleventyConfig.addExtension("css", {
 		outputFileExtension: "css",
 		compile: async function(inputContent, inputPath) {
 			return async () => {
 				const postcss = (await import("postcss")).default;
-				const tailwindcss = (await import("tailwindcss")).default;
-				const autoprefixer = (await import("autoprefixer")).default;
+				const tailwindcssPostcss = (await import("@tailwindcss/postcss")).default;
 				
-				const result = await postcss([tailwindcss, autoprefixer])
-					.process(inputContent, { from: inputPath });
+				// Try to initialize the plugin with proper working directory context
+				const result = await postcss([
+					tailwindcssPostcss()
+				]).process(inputContent, { 
+					from: inputPath,
+					to: inputPath.replace('content/', '_site/')
+				});
 				return result.css;
 			};
 		}

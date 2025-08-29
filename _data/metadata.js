@@ -1,5 +1,5 @@
 export default {
-	title: "Other Dev®",
+	title: "The Other Dev®",
 	url: "https://otherdev.com",
 	language: "en",
 	description: "Creative software agency focused on accessible, engaging digital experiences. Web development, creative agency, digital experiences, graphic design, software development, technology solutions, search engine optimization.",
@@ -13,7 +13,7 @@ export default {
 	serviceAreas: ["US", "Canada", "UK", "Australia", "Pakistan", "Germany"],
 	gmbLink: "https://g.page/17231828160667184010",
 	author: {
-		name: "Other Dev®",
+		name: "The Other Dev®",
 		email: "hello@otherdev.com",
 		url: "https://otherdev.com/"
 	}

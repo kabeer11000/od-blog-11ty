@@ -9,9 +9,9 @@ layout: layouts/base.njk
 	<div class="flex-auto w-full relative lg:container mx-auto">
 		<article class="py-24 md:py-32 px-4">
 			<header class="mb-12">
-				<h1 class="font-queens text-3xl md:text-4xl lg:text-5xl leading-tight mb-6 text-[var(--color-stone-400-inverted)]">{{ title }}</h1>
+				<h1 class="font-queens text-3xl md:text-4xl lg:text-5xl leading-tight mb-6 blog-title">{{ title }}</h1>
 				
-				<div class="flex flex-wrap gap-4 items-center text-sm text-[var(--color-stone-400-inverted)]/70 font-twk">
+				<div class="flex flex-wrap gap-4 items-center text-sm blog-text opacity-70 font-twk">
 					<time datetime="{{ page.date | htmlDateString }}" class="font-medium">
 						{{ page.date | readableDate }}
 					</time>
@@ -20,7 +20,7 @@ layout: layouts/base.njk
 						<div class="flex flex-wrap gap-2">
 							{%- for tag in tags | filterTagList %}
 							{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-							<a href="{{ tagUrl }}" class="inline-block px-3 py-1 bg-[var(--color-stone-400-inverted)]/10 hover:bg-[var(--color-stone-400-inverted)]/20 rounded-full text-xs font-medium transition-colors duration-200">
+							<a href="{{ tagUrl }}" class="inline-block px-3 py-1 bg-black/10 hover:bg-black/20 rounded-full text-xs font-medium transition-colors duration-200 blog-text">
 								{{ tag }}
 							</a>
 							{%- endfor %}
@@ -29,7 +29,7 @@ layout: layouts/base.njk
 				</div>
 			</header>
 
-			<div class="prose prose-lg max-w-none font-twk text-[var(--color-stone-400-inverted)]">
+			<div class="prose prose-lg max-w-none font-twk blog-text">
 				{{ content | safe }}
 			</div>
 		</article>
@@ -38,12 +38,12 @@ layout: layouts/base.njk
 		{%- set previousPost = collections.posts | getPreviousCollectionItem %}
 		{%- set nextPost = collections.posts | getNextCollectionItem %}
 		{%- if nextPost or previousPost %}
-		<nav class="px-4 pb-16 border-t border-[var(--color-stone-400-inverted)]/20" aria-label="Post navigation">
+		<nav class="px-4 pb-16 border-t border-black/20" aria-label="Post navigation">
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 		{%- if previousPost %}
 		<div class="group">
-			<p class="text-xs font-twk text-[var(--color-stone-400-inverted)]/70 mb-2 uppercase tracking-wider">Previous</p>
-			<a href="{{ previousPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity text-[var(--color-stone-400-inverted)]">
+			<p class="text-xs font-twk blog-text opacity-70 mb-2 uppercase tracking-wider">Previous</p>
+			<a href="{{ previousPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity blog-title">
 				{{ previousPost.data.title }}
 			</a>
 		</div>
@@ -51,8 +51,8 @@ layout: layouts/base.njk
 		
 		{%- if nextPost %}
 		<div class="group md:text-right">
-			<p class="text-xs font-twk text-[var(--color-stone-400-inverted)]/70 mb-2 uppercase tracking-wider">Next</p>
-			<a href="{{ nextPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity text-[var(--color-stone-400-inverted)]">
+			<p class="text-xs font-twk blog-text opacity-70 mb-2 uppercase tracking-wider">Next</p>
+			<a href="{{ nextPost.url }}" class="block font-queens text-lg hover:opacity-75 transition-opacity blog-title">
 				{{ nextPost.data.title }}
 			</a>
 		</div>

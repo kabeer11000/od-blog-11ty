@@ -31,14 +31,14 @@
 ] -%}
 
 {#- Mobile Navigation -#}
-<nav aria-label="Mobile Navigation" class="text-[var(--color-stone-400-inverted)] lg:hidden flex justify-between header-blend-mode items-center w-full px-4 pt-4 text-sm fixed top-0 z-50">
+<nav aria-label="Mobile Navigation" class="lg:hidden flex justify-between header-blend-mode items-center w-full px-4 pt-4 text-sm fixed top-0 z-50">
   <div>
-    <a href="/" class="w-full flex-1/2 font-queens text-lg" aria-label="The Other Dev Home">{{ metadata.title }}</a>
+    <a href="/" class="w-full flex-1/2 font-queens text-lg" aria-label="The Other Dev® Home">The Other Dev®</a>
   </div>
   <div class="flex items-center gap-4">
     <div class="font-twk text-xs text-right">
       <span id="mobile-clock" class="block min-w-[12ch] tabular-nums">--:-- PKT</span>
-      <p class="opacity-75">Karachi</p>
+      <p class="opacity-90">Karachi</p>
     </div>
     <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-menu" class="mobile-navigation-trigger p-2 -mr-2">
     <span class="sr-only">Menu</span>
@@ -80,7 +80,7 @@
     {#- Mobile Footer Social Links -#}
     <div class="fixed px-4 bottom-0 left-0 w-full bg-stone-400/90 backdrop-blur-sm flex justify-between items-center py-4 border-t border-black">
       {% for link in socialLinks %}
-        <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center hover:opacity-80 transition-opacity" aria-label="{{ link.title }} (opens in a new tab)">
+        <a href="{{ link.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center hover:opacity-80 transition-opacity nav-text" aria-label="{{ link.title }} (opens in a new tab)">
           {{ icons[link.icon] | safe }}
           <span class="ml-2 text-sm">{{ link.title }}</span>
         </a>
@@ -90,25 +90,26 @@
 </div>
 
 {#- Desktop Navigation -#}
-<nav aria-label="Primary Navigation" class="menu-withclock hidden lg:block w-full pt-4 px-4 text-lg header-blend-mode bg-clip-text bg-transparent text-[var(--color-stone-400-inverted)] fixed top-0 z-50">
+<nav aria-label="Primary Navigation" class="menu-withclock hidden lg:block w-full pt-4 px-4 text-lg header-blend-mode fixed top-0 z-50">
   <div class="flex justify-between items-center lg:container mx-auto">
     <div class="font-bold font-queens text-xl">
-      <a href="/" class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left cursor-arrow-right" aria-label="Other Dev® Home">{{ metadata.title }}</a>
+      <a href="/" class="before:bg-black dynamic-underline-left cursor-arrow-right hover:opacity-75 transition-all" aria-label="The Other Dev® Home">The Other Dev®</a>
     </div>
 
-    <div class="flex items-center gap-8">
-      <p class="font-twk">Software and Design</p>
-      <div class="font-twk text-sm">
-        <span id="desktop-clock" class="min-w-[17ch] tabular-nums">--:-- PKT</span>
-        <p class="text-xs opacity-75 mt-1">Karachi</p>
-      </div>
+    <div class="font-twk">
+      <p>Software and Design</p>
+    </div>
+
+    <div class="flex items-center gap-2 font-twk text-sm">
+      <span id="desktop-clock" class="min-w-[17ch] tabular-nums">--:-- PKT</span>
+      <p class="text-xs opacity-90">Karachi</p>
     </div>
 
     {#- Main Desktop Links -#}
-    <ul class="flex gap-6 font-twk">
+    <ul class="flex gap-6">
       {% for item in navLinks %}
         <li>
-          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="before:bg-[var(--color-stone-400-inverted)] dynamic-underline-left hover:opacity-75 transition-all cursor-arrow-right"{% if item.path == page.url %} aria-current="page"{% endif %}>
+          <a href="{{ item.path }}"{% if item.target %} target="{{ item.target }}" rel="noopener noreferrer"{% endif %} class="font-twk before:bg-black dynamic-underline-left hover:opacity-75 transition-all cursor-arrow-right"{% if item.path == page.url %} aria-current="page"{% endif %}>
             {{ item.title }}
           </a>
         </li>
@@ -116,9 +117,9 @@
     </ul>
 
     {#- Desktop Right-Side Links (Action & Social) -#}
-    <ul class="flex gap-4 items-center font-twk">
+    <ul class="flex gap-4 items-center">
       <li>
-        <a href="{{ letsMeetLink.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity cursor-arrow-right" aria-label="{{ letsMeetLink.title }} (opens in a new tab)">
+        <a href="{{ letsMeetLink.path }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-twk hover:opacity-80 transition-opacity cursor-arrow-right" aria-label="{{ letsMeetLink.title }} (opens in a new tab)">
           <span class="font-medium">{{ letsMeetLink.title }}</span>
           {{ icons[letsMeetLink.icon] | safe }}
         </a>
@@ -137,7 +138,7 @@
 {#- Navigation Styles -#}
 <style>
   .header-blend-mode {
-    mix-blend-mode: difference;  
+    mix-blend-mode: difference; 
     will-change: transform; 
     isolation: isolate; 
   }
@@ -190,28 +191,28 @@ document.addEventListener('DOMContentLoaded', function() {
     menuButton.addEventListener('click', function() {
       const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
       
-      // Toggle menu visibility with GSAP animations
+      // Toggle menu visibility with improved GSAP animations
       if (isOpen) {
-        // Close menu
+        // Close menu with smooth easing
         gsap.to(mobileMenu, { 
-          duration: 0.5, 
+          duration: 0.6, 
           y: '100%', 
-          ease: "power2.inOut" 
+          ease: "power3.inOut" 
         });
-        // Animate text swap
-        gsap.to(closeText, { duration: 0.3, y: 24, ease: "power2.inOut" });
-        gsap.to(menuText, { duration: 0.3, y: 0, ease: "power2.inOut" });
+        // Animate text swap with stagger
+        gsap.to(closeText, { duration: 0.25, y: 24, ease: "power2.out" });
+        gsap.to(menuText, { duration: 0.25, y: 0, ease: "power2.out", delay: 0.1 });
         body.style.overflow = '';
       } else {
-        // Open menu
+        // Open menu with smooth easing
         gsap.to(mobileMenu, { 
-          duration: 0.5, 
+          duration: 0.6, 
           y: '0%', 
-          ease: "power2.inOut" 
+          ease: "power3.inOut" 
         });
-        // Animate text swap
-        gsap.to(menuText, { duration: 0.3, y: -24, ease: "power2.inOut" });
-        gsap.to(closeText, { duration: 0.3, y: 0, ease: "power2.inOut" });
+        // Animate text swap with stagger
+        gsap.to(menuText, { duration: 0.25, y: -24, ease: "power2.out" });
+        gsap.to(closeText, { duration: 0.25, y: 0, ease: "power2.out", delay: 0.1 });
         body.style.overflow = 'hidden';
       }
       
@@ -245,22 +246,24 @@ document.addEventListener('DOMContentLoaded', function() {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: true,
-      timeZoneName: 'short'
+      hour12: true
     };
 
     try {
       const now = new Date();
-      let timeString = now.toLocaleTimeString('en-US', options);
-      timeString = timeString.replace(/\s*\(PKT\)/, '');
+      const timeString = now.toLocaleTimeString('en-US', options);
+      const displayTime = timeString + ' PKT';
       
       // Update both desktop and mobile clocks
       const desktopClock = document.getElementById('desktop-clock');
       const mobileClock = document.getElementById('mobile-clock');
       
-      if (desktopClock) desktopClock.textContent = timeString;
-      if (mobileClock) mobileClock.textContent = timeString;
+      if (desktopClock) desktopClock.textContent = displayTime;
+      if (mobileClock) mobileClock.textContent = displayTime;
+      
+      console.log('Clock updated:', displayTime); // Debug log
     } catch (e) {
+      console.error('Clock update failed:', e);
       // Fallback display
       const fallbackTime = '--:-- PKT';
       const desktopClock = document.getElementById('desktop-clock');

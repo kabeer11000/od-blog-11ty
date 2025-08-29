@@ -19,9 +19,9 @@ const eleventyComputed = {
 	}
 };
 ---
-<h1>Tagged “{{ tag }}”</h1>
+<h1 class="font-queens text-4xl md:text-5xl leading-tight mb-12 blog-title">Tagged "{{ tag }}"</h1>
 
 {% set postslist = collections[ tag ] %}
 {% include "postslist.njk" %}
 
-<p>See <a href="tags.njk">all tags</a>.</p>
+<p class="mt-12 font-twk blog-text">See <a href="/tags/" class="blog-text underline hover:opacity-75 transition-opacity">all tags</a>.</p>

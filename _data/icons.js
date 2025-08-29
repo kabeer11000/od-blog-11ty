@@ -1,73 +1,14 @@
-// Icon system - properly imports Tabler icons
-import fs from 'fs';
-import path from 'path';
-
-const iconsDir = 'node_modules/@tabler/icons/icons/outline';
-
-function getIcon(iconName, size = 16) {
-  try {
-    const iconPath = path.join(iconsDir, `${iconName}.svg`);
-    let svgContent = fs.readFileSync(iconPath, 'utf8');
-    
-    // Clean up the SVG - remove default classes and set proper size
-    svgContent = svgContent
-      .replace(/class="[^"]*"/g, '')  // Remove default classes
-      .replace(/width="24"/, `width="${size}"`)
-      .replace(/height="24"/, `height="${size}"`)
-      .replace(/>/,` class="w-4 h-4" aria-hidden="true">`); // Add our classes
-    
-    return svgContent;
-  } catch (error) {
-    console.error(`Icon ${iconName} not found:`, error);
-    return '';
-  }
-}
-
-function getCursorIcon(iconName, size = 32) {
-  try {
-    const iconPath = path.join(iconsDir, `${iconName}.svg`);
-    let svgContent = fs.readFileSync(iconPath, 'utf8');
-    
-    // Create cursor-optimized SVG with filled circle and proper sizing
-    svgContent = svgContent
-      .replace(/class="[^"]*"/g, '')  // Remove default classes
-      .replace(/width="24"/, `width="${size}"`)
-      .replace(/height="24"/, `height="${size}"`)
-      .replace(/viewBox="0 0 24 24"/, `viewBox="0 0 24 24"`)
-      .replace(/stroke="currentColor"/, 'stroke="white"')
-      .replace(/fill="none"/, 'fill="black"')
-      .replace(/stroke-width="2"/, 'stroke-width="1"');
-    
-    return svgContent;
-  } catch (error) {
-    console.error(`Cursor icon ${iconName} not found:`, error);
-    return '';
-  }
-}
-
-// Generate cursor SVG files
-function generateCursorFiles() {
-  const cursors = {
-    'arrow-left': getCursorIcon('circle-arrow-left'),
-    'arrow-right': getCursorIcon('circle-arrow-right')
-  };
-  
-  const iconsOutputDir = 'public/icons';
-  if (!fs.existsSync(iconsOutputDir)) {
-    fs.mkdirSync(iconsOutputDir, { recursive: true });
-  }
-  
-  for (const [name, content] of Object.entries(cursors)) {
-    fs.writeFileSync(path.join(iconsOutputDir, `${name}.svg`), content);
-  }
-}
-
-// Generate cursor files when this module is loaded
-generateCursorFiles();
-
+// Professional SVG Icons matching otherdev.com - no duplicate IDs
 export default {
-  externalLink: getIcon('external-link'),
-  linkedin: getIcon('brand-linkedin'), 
-  instagram: getIcon('brand-instagram'),
-  // Cursor icons are generated as files, not embedded
+  linkedin: `<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true">
+    <path d="M88.0952 0H11.9048C5.33333 0 0 5.33333 0 11.9048V88.0952C0 94.6667 5.33333 100 11.9048 100H88.0952C94.6667 100 100 94.6667 100 88.0952V11.9048C100 5.33333 94.6667 0 88.0952 0ZM30.9524 38.0952V83.3333H16.6667V38.0952H30.9524ZM16.6667 24.9286C16.6667 21.5952 19.5238 19.0476 23.8095 19.0476C28.0952 19.0476 30.7857 21.5952 30.9524 24.9286C30.9524 28.2619 28.2857 30.9524 23.8095 30.9524C19.5238 30.9524 16.6667 28.2619 16.6667 24.9286ZM83.3333 83.3333H69.0476C69.0476 83.3333 69.0476 61.2857 69.0476 59.5238C69.0476 54.7619 66.6667 50 60.7143 49.9048H60.5238C54.7619 49.9048 52.381 54.8095 52.381 59.5238C52.381 61.6905 52.381 83.3333 52.381 83.3333H38.0952V38.0952H52.381V44.1905C52.381 44.1905 56.9762 38.0952 66.2143 38.0952C75.6667 38.0952 83.3333 44.5952 83.3333 57.7619V83.3333Z" fill="currentColor"/>
+  </svg>`,
+
+  instagram: `<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true">
+    <path d="M49.5508 0C3.59828 0 0 3.59828 0 49.5508V50.4492C0 96.4017 3.59828 100 49.5508 100H50.4492C96.4017 100 100 96.4017 100 50.4492V50C100 3.63 96.37 0 50 0H49.5508ZM40 10H60C87.8225 10 90 12.1775 90 40V60C90 87.8225 87.8225 90 60 90H40C12.1775 90 10 87.8225 10 60V40C10 12.1775 12.1775 10 40 10ZM74.9854 20C72.2229 20.0075 69.9925 22.2521 70 25.0146C70.0075 27.7771 72.2521 30.0075 75.0146 30C77.7771 29.9925 80.0075 27.7479 80 24.9854C79.9925 22.2229 77.7479 19.9925 74.9854 20ZM49.9414 25C36.1364 25.0325 24.9675 36.2536 25 50.0586C25.0325 63.8636 36.2536 75.0325 50.0586 75C63.8636 74.9675 75.0325 63.7464 75 49.9414C74.9675 36.1364 63.7464 24.9675 49.9414 25ZM49.9658 35C58.2483 34.98 64.98 41.6833 65 49.9658C65.0175 58.2483 58.3167 64.98 50.0342 65C41.7517 65.02 35.02 58.3192 35 50.0342C34.98 41.7517 41.6833 35.02 49.9658 35Z" fill="currentColor"/>
+  </svg>`,
+
+  externalLink: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true">
+    <path d="M27.9487 0L28 23.6922H23.8898V6.97433L2.87707 28L0 25.1281L21.0128 4.10256H4.31559V0H27.9487Z" fill="currentColor"/>
+  </svg>`
 };
